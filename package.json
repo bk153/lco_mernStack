@@ -17,8 +17,10 @@
   },
   "homepage": "https://github.com/bk153/lco_mernStack#readme",
   "dependencies": {
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
-    "mongoose": "^5.7.7",
-    "nodemon": "^3.0.1"
+    "mongoose": "^5.13.20",
+    "nodemon": "^1.19.4",
+    "npm": "^6.13.0"
   }
 }
