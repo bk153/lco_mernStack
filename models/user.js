@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-const crypto = require('crypto')
-const uuidv1 = require('uuid/v1')
+const crypto = require("crypto");
+const uuidv1 = require("uuid/v1");
 
 let userSchema = new mongoose.Schema({
   name: {
@@ -27,7 +27,7 @@ let userSchema = new mongoose.Schema({
   //TODO: password
   encry_password: {
     type: String,
-    required:true
+    required: true,
   },
   salt: String,
   role: {
@@ -41,31 +41,34 @@ let userSchema = new mongoose.Schema({
 });
 
 //virtualCreation
-userSchema.virtual("password")
-    .set(function(password){
-        this._password = password
-        this.salt = uuidv1()
-        this.encry_password = this.securePassword(password)
-    })
-    .get(function(){
-        return this._password
-    })
+userSchema
+  .virtual("password")
+  .set(function (password) {
+    this._password = password;
+    this.salt = uuidv1();
+    this.encry_password = this.securePassword(password);
+  })
+  .get(function () {
+    return this._password;
+  });
 
+// Multiple Method Creation
 userSchema.method = {
-    authenticate:function(plainpassword){
-        return this.securePassword(plainPassword)=== this.encry_password
-    },
+  authenticate: function (plainpassword) {
+    return this.securePassword(plainPassword) === this.encry_password;
+  },
 
-    securePassword : function(plainPassword){
-        if(!password) return "";
-        try{
-            return crypto.createHmac('sha256', this.salt)
-            .update(plainPassword)
-            .digest('hex')
-        }catch(err){
-            return "";
-        }
+  securePassword: function (plainPassword) {
+    if (!password) return "";
+    try {
+      return crypto
+        .createHmac("sha256", this.salt)
+        .update(plainPassword)
+        .digest("hex");
+    } catch (err) {
+      return "";
     }
-}
+  },
+};
 
 module.exports = mongoose.model("User", userSchema);
