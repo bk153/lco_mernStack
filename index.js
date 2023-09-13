@@ -9,15 +9,15 @@ const PORT = process.env.PORT | 7000;
 
 const app = express();
 
-// Middlewares
+//- Middlewares
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors());
 
-// Routes
+//- Routes
 app.use("/v1/api", routes);
 
-// Server Creation
+//- Server Creation
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
 });
