@@ -54,7 +54,7 @@ userSchema
 
 // Multiple Method Creation
 userSchema.methods = {
-  authenticate: function (plainpassword) {
+  authenticate: function (plainPassword) {
     return this.securePassword(plainPassword) === this.encry_password;
   },
 
